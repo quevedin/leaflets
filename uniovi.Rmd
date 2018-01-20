@@ -1,0 +1,33 @@
+---
+title: "Map of a few selected buildings of Oviedo University"
+author: "Lucas Fernández Seivane"
+date: "20-01-2018"
+output: html_document
+---
+Oviedo University is spread in three cities and seven campuses. I have used
+leaflet to plot a few of its buildings.
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r,echo=FALSE}
+library(leaflet)
+
+locations=as.data.frame(matrix(
+c(
+43.375666,-5.8296378,
+43.3582776,-5.8668755,
+43.3618914,-5.8598368,
+43.2685906,-5.8090753,
+43.5242563,-5.6289423,
+43.5242563,-5.6289423)
+, ncol=2,byrow = T))
+colnames(locations)=c("lat","lng")
+
+unioviIcon <- makeIcon(
+  iconUrl = "https://lh4.ggpht.com/GtDJt3yVJrUlrHlcC0z8Gdrutl_sYiXSlZ_Yo1Mdv6Nv9IIGno0RDuTZsWxwpZZcfow",
+  iconWidth = 31
+)
+
+locations %>% leaflet()  %>% addTiles() %>% addMarkers(clusterOptions = markerClusterOptions,icon = unioviIcon)
+
+```
